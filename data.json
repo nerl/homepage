@@ -11,7 +11,7 @@
 			"copyright": "<a href='https://bwinf.de/'>BWINF</a>",
 			"image":"images/unity-biber.png"
 		},
-		{
+		{ 
 			"id": 1, 
 			"name": "Brueckentrolle",
 			"link": "brueckentrolle/",			
