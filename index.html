@@ -1,17 +1,117 @@
-<!DOCTYPE html>    
-<html lang="de" dir="ltr">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
 
-  <head>
-<meta charset="utf-8">  
-    </head>
-    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script> 
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script type="text/javascript" src="script.js"></script>
+
+
+</head>
 <body>
-<h1>Projects with Blender and Unity </h1>
 
-<a href="./unity/biber/">
-<img src="./images/unity-biber.png">
-<br>
-Biber17-lecker</a>
+<div class="w3-container">
+<h1>Blender und Unity Projekte</h1>
+</div>
+
+
+<div id="w3-bar-w3-black" class="w3-bar w3-black">
+
+</div>
+
+<div id="pages">
+
+</div>
+
+
+
+<script type="text/javascript">
+
+function showPage(pageName) {
+	var i;
+	var x = document.getElementsByClassName("w3-container page");
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "none";  
+	}
+	document.getElementById(pageName).style.display = "block";  
+}
+
+
+
+	function printData(data) {
+		//document.write ("<pre>" + JSON.stringify(data) + "</pre>");
+		pages = data.pages;
+		for (i=0; i<pages.length; i++) {
+			element = document.getElementById("w3-bar-w3-black");
+			var button = "<button class=\"w3-bar-item w3-button\" onclick=\"showPage('"+ pages[i].name +"')\">"+pages[i].name+"</button>";
+			element.innerHTML +=  button;
+			
+
+			element = document.getElementById("pages");
+			var divHTML = 
+				"<div id=\""+ pages[i].name +"\" class=\"w3-container page\" style=\"display:none; width: 50%\" >" 
+				+ "<a style=' text-decoration: none;' href='"+ pages[i].link +"'><h2>"+ pages[i].name + "</h2>"
+				+ ((pages[i].image)?"<img style='float:left;' src='" + pages[i].image +"'>":"")
+				+ pages[i].description
+				+ "<hr>Copyright für Bilder und Idee: " + pages[i].copyright
+				
+				+ "</a>"
+				+ "</div>";
+			element.innerHTML += divHTML;
+		}
+	}
+
+
+	
+	loadJSON('data.json?nocache=' + (new Date()).getTime(), function(text){
+    var data = JSON.parse(text);
+	console.log(data);
+	printData(data);
+	});
+
+</script>
+</body>
+</html>
+
+
+<!--
+<div class="w3-container">
+  <h2>Tabs</h2>
+</div>
+
+<div id="w3-bar w3-black" class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" onclick="showPage('London')">London</button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Paris</button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Tokyo</button>
+</div>
+
+<div id="London" class="w3-container page">
+  <h2>London</h2>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="w3-container page" style="display:none">
+  <h2>Paris</h2>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Tokyo" class="w3-container page" style="display:none">
+  <h2>Tokyo</h2>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+
+
+
+
+<script>
+
+</script>
 
 </body>
 </html>
+
+
+-->  
