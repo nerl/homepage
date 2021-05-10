@@ -23,3 +23,5 @@ window.onload = () => {
     awb_result = "<ol>" + awb_result + "</ol><br><hr><br>"
     document.getElementById("inhaltsverzeichnis").innerHTML = "<hr><b>Zum letzten Eintrag springen:<br>" + lastEntry + "</b><hr>" + awb_result;
   }
+
+  console.log ("Test fertig");
