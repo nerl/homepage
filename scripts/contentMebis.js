@@ -27,7 +27,7 @@ window.onload = () => {
     awb_result = jumpToTheEnd + "<ol>" + awb_result + "</ol><br><hr><br>"
     document.getElementById("inhaltsverzeichnis").innerHTML = "<hr><b>Zum letzten Eintrag springen:<br>" + lastEntry + "</b><hr>" + awb_result;
 
-    document.getElementById("changenumsections").innerHTML = document.getElementById("changenumsections").innerHTML + "<a href=''>Nach oben</a>";
+//    document.getElementById("changenumsections").innerHTML = document.getElementById("changenumsections").innerHTML + "<a href=''>Nach oben</a>";
     
 
   }
