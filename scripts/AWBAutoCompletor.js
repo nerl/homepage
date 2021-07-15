@@ -36,8 +36,8 @@ class AwbAutoCompletor {
     addInputEventListener(elementID) {
         document.getElementById(elementID).addEventListener('input', event => {
             //console.log (this.dataArray);
-            var val = document.getElementById("input").value;
-            var opts = document.getElementById('datalist').childNodes;
+            var val = document.getElementById(this.id).value;
+            var opts = document.getElementById(this.idOfDataList).childNodes;
             for (var i = 0; i < opts.length; i++) {
                 if (opts[i].value === val) {
                     // An item was selected from the list!
