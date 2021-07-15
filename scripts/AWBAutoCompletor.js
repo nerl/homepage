@@ -33,8 +33,9 @@ class AwbAutoCompletor {
     /**
      * @private
      */
-    addInputEventListener(elementID) {
-        document.getElementById(elementID).addEventListener('input', event => {
+    addInputEventListener() {
+        console.log ("Element ID: " + this.id);
+        document.getElementById(this.id).addEventListener('input', event => {
             //console.log (this.dataArray);
             var val = document.getElementById(this.id).value;
             var opts = document.getElementById(this.idOfDataList).childNodes;
