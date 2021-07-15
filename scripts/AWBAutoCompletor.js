@@ -12,8 +12,11 @@ class AwbAutoCompletor {
         //this.dataArray = loadDataArray();
         this.dataArray = dataArray;
         this.id = id;
-        this.addOptionValues(idOfDataList);
-        this.addInputEventListener(id);
+        this.idOfDataList = idOfDataList;
+        
+        
+        this.addInputEventListener();
+        this.addOptionValues();
         this.callBackFunction = callBackFunction;
     }
     /***
@@ -55,13 +58,13 @@ class AwbAutoCompletor {
     /**
      * @private
      */
-    addOptionValues(idOfDataList) {
+    addOptionValues() {
         var optionValueElement;
         this.dataArray.forEach(element => {
             //console.log (element);
             optionValueElement = document.createElement("option");
             optionValueElement.value = element.join();
-            document.getElementById(idOfDataList).appendChild(optionValueElement);
+            document.getElementById(this.idOfDataList).appendChild(optionValueElement);
             //optionValueElement.text = dataArray[0].join();        
         });
     }
