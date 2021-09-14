@@ -26,7 +26,7 @@ window.onload = () => {
     //console.log ("inhaltsverzeichnis: " + document.getElementById("inhaltsverzeichnis").innerText);
     awb_result = jumpToTheEnd + "<ol>" + awb_result + "</ol><br><hr><br>"
    
-    document.getElementById("inhaltsverzeichnis").innerHTML = "<hr><b>Zum letzten Eintrag springen:<br>" + lastEntry + "</b><hr>" + awb_result;
+    //document.getElementById("inhaltsverzeichnis").innerHTML = "<hr><b>Zum letzten Eintrag springen:<br>" + lastEntry + "</b><hr>" + awb_result;
    }
 
 //    document.getElementById("changenumsections").innerHTML = document.getElementById("changenumsections").innerHTML + "<a href=''>Nach oben</a>";
