@@ -22,20 +22,27 @@
 </head>
 <script>
 	
+var evaluationElements =  [
+	  {name:"task", heading: "Tasknennungen"},
+	  {name:"room", heading: "Raumnennungen"},
+
+
+	  ]
 
 </script>
 <body>
 
 	<div id="chartContainer" >
 		<div>
-			<div class="card-panel" id="taskFrequencyHeading">HUhuhuhu</div>
+			<div class="card-panel" id="taskFrequencyHeading"></div>
 			<canvas style='width: 100%; height: 250px;' id="taskFrequencyChart"></canvas>
-			<div class="card-panel" id="taskFrequencyDescription">HUhuhuhu</div>
+			<div class="card-panel" id="taskFrequencyDescription"></div>
 		  </div>
-		  <div style="background-color: beige; width:240px;height:10px"></div>
+
+		  <div class="divider"></div>
 	
 			<div>
-			<div class="card-panel" id="roomFrequencyHeading">HUhuhuhu</div>
+			<div class="card-panel" id="roomFrequencyHeading"></div>
 			<canvas style='width: 100%; height: 250px;' id="roomFrequencyChart"></canvas>
 			<div class="card-panel" id="roomFrequencyDescription"></div>
 		  </div>
@@ -55,10 +62,10 @@
 	//GET https://sheets.googleapis.com/v4/spreadsheets/spreadsheetId/values/Sheet1
 
 	
-
-	function createChart(frequencyName, l , d) {
+	
+	function createChart(evaluationElement, l , d) {
 		//taskByFrequencyChart = document.getElementById(frequencyName+'Chart');	
-		return new Chart(document.getElementById(frequencyName+'Chart'), {
+		return new Chart(document.getElementById(evaluationElement+'Chart'), {
 		type: 'bar',
 		display: true,
 		data: {
@@ -103,7 +110,7 @@
 	});
 	}
 
-	async function get(frequencyName) {
+	async function get(evaluationElement) {
 	
 		let url ="";
 		//url = "https://sheets.googleapis.com/v4/spreadsheets/1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv/1/public/full?alt=json";
@@ -112,7 +119,7 @@
 		//let  gid = "";
 		//url = 'https://docs.google.com/spreadsheets/d/' + id + '/gviz/tq?tqx=out:json&tq&gid='+gid + '&callback=';
 		//     https://sheets.googleapis.com/v4/spreadsheets/spreadsheetId/values/Sheet1
-		url = "https://sheets.googleapis.com/v4/spreadsheets/" +id + "/values/" + frequencyName + "?key=AIzaSyD794gz8ZSSc-6csSWbhGAHWbTMPLgmYIc";
+		url = "https://sheets.googleapis.com/v4/spreadsheets/" +id + "/values/" + evaluationElement + "?key=AIzaSyD794gz8ZSSc-6csSWbhGAHWbTMPLgmYIc";
 		
 
 
@@ -126,21 +133,21 @@
 		d = new Array();
 		l = new Array();
 		description = new Array();
-		json.values.forEach(element => {
-			//log (element);
-			//console.log (element[0]);
-			if (element[1]>2) {
-				l.push (element[0] + " [" + element[1] + "]");
-				d.push (element[1]);
+		json.values.forEach(entry => {
+			//log (entry);
+			//console.log (entry[0]);
+			if (entry[1]>2) {
+				l.push (entry[0] + " [" + entry[1] + "]");
+				d.push (entry[1]);
 			}
-			description.push(element[0] + " [" + element[1] + "]");
+			description.push(entry[0] + " [" + entry[1] + "]");
 			
 		});
+
+		createChart (evaluationElement, l, d);
+	  
 		
-		createChart (frequencyName, l, d);
-		  
-		
-		document.getElementById(frequencyName+"Description").innerHTML = "<hr><b>Alle Nennungen:</b> " + description.join(" | ");
+		document.getElementById(evaluationElement+"Description").innerHTML = "<b>Alle Nennungen:</b> " + description.join(" | ");
 		
 	}
 
@@ -160,8 +167,12 @@
 <script>
 // self executing function here
 (function() {
-	get("taskFrequency");
-	get("roomFrequency");
+	evaluationElements.forEach(element => {
+		get(element.name + "Frequency");
+		document.getElementById(element.name+"FrequencyHeading").innerHTML = element.heading;
+	})
+	
+
 
 })();
 </script>
