@@ -1,182 +1,145 @@
 <!DOCTYPE html >
 <html >
+   <head>
+      <meta charset="utf-8">
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+      <!-- Compiled and minified CSS -->
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<head>
-	<meta charset="utf-8">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <script>
+      var evaluationElements =  [
+      	  {name:"task", heading: "Für welche Bereiche wurden Tickets über das KKG Ticket erstellt?"},
+      	  {name:"room", heading: "In welchen Räumen kam es zu IT Problemen?"},
+      	  ]
+      
+   </script>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
-
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
-    <!-- Compiled and minified CSS -->
-    <!-- Compiled and minified JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
-<script>
-	
-var evaluationElements =  [
-	  {name:"task", heading: "Für welche Bereiche wurden Tickets über das KKG Ticket erstellt?"},
-	  {name:"room", heading: "In welchen Räumen kam es zu IT Problemen?"},
-
-
-	  ]
-
-</script>
 <body>
-
-	<div id="chartContainer" >
-		<div>
-			<div class="card-panel" id="taskFrequencyHeading"></div>
-			<canvas style='width: 100%; height: 250px;' id="taskFrequencyChart"></canvas>
-			<div class="card-panel" id="taskFrequencyDescription"></div>
-		  </div>
-
-		  <div class="divider"></div>
-	
-			<div>
-			<div class="card-panel" id="roomFrequencyHeading"></div>
-			<canvas style='width: 100%; height: 250px;' id="roomFrequencyChart"></canvas>
-			<div class="card-panel" id="roomFrequencyDescription"></div>
-		  </div>
-	</div>
-	
-	<div id="main">
-	
-	</div>
-
-<script>
-
-	
-
-	function log (s) {
-		document.getElementById("main").innerHTML= document.getElementById("main").innerHTML + "<br>" + "<code>" + s + "</code>";
-	}
-	//GET https://sheets.googleapis.com/v4/spreadsheets/spreadsheetId/values/Sheet1
-
-	
-	
-	function createChart(evaluationElement, l , d) {
-		//taskByFrequencyChart = document.getElementById(frequencyName+'Chart');	
-		return new Chart(document.getElementById(evaluationElement+'Chart'), {
-		type: 'bar',
-		display: true,
-		data: {
-			labels: l, //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-			datasets: [{
-				label: '# of Votes',
-				data: d, // [1,10,20,50,10,50],
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)'
-				],
-				borderColor: [
-					'rgba(255, 99, 132, 1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)'
-				],
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
+      <div id="chartContainer" >
+         <div>
+            <div class="card-panel" id="taskFrequencyHeading"></div>
+            <canvas style='width: 100%; height: 250px;' id="taskFrequencyChart"></canvas>
+            <div class="card-panel" id="taskFrequencyDescription"></div>
+         </div>
+         <div class="divider"></div>
+         <div>
+            <div class="card-panel" id="roomFrequencyHeading"></div>
+            <canvas style='width: 100%; height: 250px;' id="roomFrequencyChart"></canvas>
+            <div class="card-panel" id="roomFrequencyDescription"></div>
+         </div>
+      </div>
+      <div id="main">
+      </div>
+      <script>
+         function log (s) {
+         	document.getElementById("main").innerHTML= document.getElementById("main").innerHTML + "<br>" + "<code>" + s + "</code>";
+         }
+       
+         
+         
+         
+         function createChart(evaluationElement, l , d) {
+         	return new Chart(document.getElementById(evaluationElement+'Chart'), {
+				type: 'bar',
+				display: true,
+				data: {
+					labels: l, //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+					datasets: [{
+						label: '# of Votes',
+						data: d, // [1,10,20,50,10,50],
+						backgroundColor: [
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(255, 159, 64, 0.2)'
+						],
+						borderColor: [
+							'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)',
+							'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)',
+							'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)'
+						],
+						borderWidth: 1
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					},
+					legend: {
+							position: 'bottom',
+							labels: {
+								fontColor: "white",
+								boxWidth: 20,
+								padding: 20
+							}
+						}
 				}
-			},
-			legend: {
-                position: 'bottom',
-                labels: {
-                    fontColor: "white",
-                    boxWidth: 20,
-                    padding: 20
-                }
-            }
-		}
-	});
-	}
-
-	async function get(evaluationElement) {
-	
-		let url ="";
-		//url = "https://sheets.googleapis.com/v4/spreadsheets/1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv/1/public/full?alt=json";
-		//url = "https://docs.google.com/spreadsheets/d/1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv-F8mIE2jXQ/#gid=0?alt=json";
-		let id = "1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv-F8mIE2jXQ";
-		//let  gid = "";
-		//url = 'https://docs.google.com/spreadsheets/d/' + id + '/gviz/tq?tqx=out:json&tq&gid='+gid + '&callback=';
-		//     https://sheets.googleapis.com/v4/spreadsheets/spreadsheetId/values/Sheet1
-		url = "https://sheets.googleapis.com/v4/spreadsheets/" +id + "/values/" + evaluationElement + "?key=AIzaSyD794gz8ZSSc-6csSWbhGAHWbTMPLgmYIc";
-		
-
-
-		console.log (url);
-
-		response = await fetch(url);
-		let json = await response.json();
-		console.log (json.values);
-		console.log ("------------------------------------");
-
-		d = new Array();
-		l = new Array();
-		description = new Array();
-		json.values.forEach(entry => {
-			//log (entry);
-			//console.log (entry[0]);
-			if (entry[1]>2) {
-				l.push (entry[0] + " [" + entry[1] + "]");
-				d.push (entry[1]);
-			}
-			description.push(entry[0] + " [" + entry[1] + "]");
-			
-		});
-
-		createChart (evaluationElement, l, d);
-	  
-		
-		document.getElementById(evaluationElement+"Description").innerHTML = "<b>Alle Nennungen:</b> " + description.join(" | ");
-		
-	}
+			});
+         }
+         
+         async function get(evaluationElement) {
+         	let url ="";
+         	let id = "1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv-F8mIE2jXQ";
+         	url = "https://sheets.googleapis.com/v4/spreadsheets/" +id + "/values/" + evaluationElement + "?key=AIzaSyD794gz8ZSSc-6csSWbhGAHWbTMPLgmYIc";
+         	//console.log (url);
+         
+         	response = await fetch(url);
+         	json = await response.json();
+         	//console.log (json.values);
+         	//console.log ("------------------------------------");
+         
+         	d = new Array();
+         	l = new Array();
+         	description = new Array();
+         	json.values.forEach(entry => {
+         		//log (entry);
+         		//console.log (entry[0]);
+         		if (entry[1]>2) {
+         			l.push (entry[0] + " [" + entry[1] + "]");
+         			d.push (entry[1]);
+         		}
+         		description.push(entry[0] + " [" + entry[1] + "]");
+         		
+         	});
+         
+         	createChart (evaluationElement, l, d);
+         	document.getElementById(evaluationElement+"Description").innerHTML = "<b>Alle Nennungen:</b> " + description.join(" | ");
+         }
+         //	document.onload = log ("Servus");
+         
+      </script>
 
 
 
-	
-	
-
-
-//	document.onload = log ("Servus");
-	
-	
-
-</script>
-
-
-<script>
-// self executing function here
-(function() {
-	evaluationElements.forEach(element => {
-		get(element.name + "Frequency");
-		document.getElementById(element.name+"FrequencyHeading").innerHTML = element.heading;
-	})
-	
-
-
-})();
-</script>
-</body>
-
+      <script>
+         // when all is loaded so far
+         (function() {
+         	evaluationElements.forEach(element => {
+         		get(element.name + "Frequency");
+         		document.getElementById(element.name+"FrequencyHeading").innerHTML = element.heading;
+         	})
+         	
+         
+         
+         })();
+      </script>
+   </body>
 </html>
