@@ -11,6 +11,7 @@
     }
 
 
+
     function getFormattedDateWithParameter(data) {
         datum = new Date(data);
         let month = "" + (datum.getMonth() + 1);
@@ -24,4 +25,3 @@
 
 
 
-    

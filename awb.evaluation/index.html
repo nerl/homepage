@@ -1,0 +1,159 @@
+<!DOCTYPE html >
+<html >
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <Xlink type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+    <!-- Compiled and minified CSS -->
+    <!-- Compiled and minified JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+	<div id="chartContainer" >
+		<div>
+			<canvas style='width: 100%; height: 250px;' id="taskFrequencyChart"></canvas>
+			<div id="taskFrequencyDescription">HUhuhuhu</div>
+		  </div>
+		  <div style="background-color: beige; width:240px;height:10px">
+			</div>
+	
+			<div>
+			<canvas style='width: 100%; height: 250px;' id="roomFrequencyChart"></canvas>
+			<div id="roomFrequencyDescription"></div>
+		  </div>
+	</div>
+	
+	<div id="main">
+	
+	</div>
+
+<script>
+
+	
+
+	function log (s) {
+		document.getElementById("main").innerHTML= document.getElementById("main").innerHTML + "<br>" + "<code>" + s + "</code>";
+	}
+	//GET https://sheets.googleapis.com/v4/spreadsheets/spreadsheetId/values/Sheet1
+
+	
+
+	function createChart(frequencyName, l , d) {
+		//taskByFrequencyChart = document.getElementById(frequencyName+'Chart');	
+		return new Chart(document.getElementById(frequencyName+'Chart'), {
+		type: 'bar',
+		display: true,
+		data: {
+			labels: l, //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+			datasets: [{
+				label: '# of Votes',
+				data: d, // [1,10,20,50,10,50],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true
+				}
+			},
+			legend: {
+                position: 'bottom',
+                labels: {
+                    fontColor: "white",
+                    boxWidth: 20,
+                    padding: 20
+                }
+            }
+		}
+	});
+	}
+
+	async function get(frequencyName) {
+	
+		let url ="";
+		//url = "https://sheets.googleapis.com/v4/spreadsheets/1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv/1/public/full?alt=json";
+		//url = "https://docs.google.com/spreadsheets/d/1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv-F8mIE2jXQ/#gid=0?alt=json";
+		let id = "1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv-F8mIE2jXQ";
+		//let  gid = "";
+		//url = 'https://docs.google.com/spreadsheets/d/' + id + '/gviz/tq?tqx=out:json&tq&gid='+gid + '&callback=';
+		//     https://sheets.googleapis.com/v4/spreadsheets/spreadsheetId/values/Sheet1
+		url = "https://sheets.googleapis.com/v4/spreadsheets/" +id + "/values/" + frequencyName + "?key=AIzaSyD794gz8ZSSc-6csSWbhGAHWbTMPLgmYIc";
+		
+
+
+		console.log (url);
+
+		response = await fetch(url);
+		let json = await response.json();
+		console.log (json.values);
+		console.log ("------------------------------------");
+
+		d = new Array();
+		l = new Array();
+		description = new Array();
+		json.values.forEach(element => {
+			log (element);
+			console.log (element[0]);
+			if (element[1]>2) {
+				l.push (element[0] + " [" + element[1] + "]");
+				d.push (element[1]);
+			}
+			description.push(element[0] + " [" + element[1] + "]");
+			
+		});
+		
+		createChart (frequencyName, l, d);
+		  
+		
+		document.getElementById(frequencyName+"Description").innerHTML = "<hr>Test" + description.join(" | ");
+		
+	}
+
+
+
+	
+	
+
+
+//	document.onload = log ("Servus");
+	
+	
+
+</script>
+
+
+<script>
+// self executing function here
+(function() {
+	get("taskFrequency");
+	get("roomFrequency");
+
+})();
+</script>
+</body>
+
+</html>
