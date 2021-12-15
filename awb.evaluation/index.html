@@ -97,7 +97,9 @@
          
          async function get(evaluationElement) {
          	let url ="";
+			 //https://docs.google.com/spreadsheets/d/1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv-F8mIE2jXQ/edit?usp=sharing
          	let id = "1lvODH8eq7LRnmz7279y4TVYgmMLok2oMv-F8mIE2jXQ";
+			 
          	url = "https://sheets.googleapis.com/v4/spreadsheets/" +id + "/values/" + evaluationElement + "?key=AIzaSyD794gz8ZSSc-6csSWbhGAHWbTMPLgmYIc";
          	//console.log (url);
          
@@ -109,19 +111,23 @@
          	d = new Array();
          	l = new Array();
          	description = new Array();
+			let sum = 0;
+			let counter = 0;
          	json.values.forEach(entry => {
          		//log (entry);
          		//console.log (entry[0]);
-         		if (entry[1]>2) {
+         		if (counter<11) {				// show the first 10 datasets
          			l.push (entry[0] + " [" + entry[1] + "]");
          			d.push (entry[1]);
+					sum = sum+ parseInt(entry[1]);
          		}
+				counter++; 
          		description.push(entry[0] + " [" + entry[1] + "]");
          		
          	});
          
          	createChart (evaluationElement, l, d);
-         	document.getElementById(evaluationElement+"Description").innerHTML = "<b>Alle Nennungen:</b> " + description.join(" | ");
+         	document.getElementById(evaluationElement+"Description").innerHTML = "<b>Alle Nennungen:</b> " + description.join(" | ")+ "<br><b>Summe: " + sum + "</b>";
          }
          //	document.onload = log ("Servus");
          
