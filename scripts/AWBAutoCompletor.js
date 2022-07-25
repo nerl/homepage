@@ -63,7 +63,7 @@ class AwbAutoCompletor {
         this.dataArray.forEach(element => {
             console.log ("Adding + " + element);
             optionValueElement = document.createElement("option");
-            optionValueElement.value = element.join();
+            optionValueElement.value = Array.isArray(element)?element.join():element;
             document.getElementById(this.idOfDataList).appendChild(optionValueElement);
             //optionValueElement.text = dataArray[0].join();        
         });
