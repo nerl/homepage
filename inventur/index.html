@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <Xmeta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML to Sheets</title>
+    <title>Inventur</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
     <script src="../scripts/AWBAutoCompletor.js"></script>
        <script Xsrc="https://cdn.tailwindcss.com" defer></script>
@@ -13,6 +15,28 @@
 <script>
 var rooms = ["A 4", "A 1", "A 101", "A 102", "A 103", "A 104", "A 105", "A 106", "A 107", "A 108", "A 109", "A 110", "A 13", "A 14", "A 15", "A 201", "A 202", "A 203", "A 204", "A 205", "A 206", "A 207", "A 208", "A 209", "A 210", "A 22", "A 301", "A 302", "A 303", "A 304", "A 306", "A 307", "A 7", "A 9", "Anderer Raum", "B 10", "B 1002", "B 1004", "B 1004a", "B 1007", "B 101", "B 102", "B 103", "B 104", "B 105", "B 106", "B 2", "B 2a", "B 3a", "B 4", "B 5", "B 6", "B 7", "B 8", "B 9", "C 1", "C 10", "C 14", "C 15", "C 4", "C 7", "C 8", "C 9", "E 01", "E 02", "E 03", "E 04", "E 05", "E 06", "E 08", "E 09", "E 10", "E 11", "E 12", "E GP", "E Lehrerzimmer", "MRE-1.OG-1.02", "MRE-1.OG-1.06", "MRE-1.OG-1.07", "MRE-1.OG-1.10", "MRE-1.OG-1.14", "MRE-1.OG-1.15", "MRE-EG-0.02", "MRE-EG-0.07", "MRE-EG-0.08", "MRE-EG-0.10", "MRE-EG-0.11", "MRE-EG-0.15", "MRE-EG-0.16", "N 1", "N 2", "N 3", "N 4", "N 4a", "N 5", "N 6", "N 7", "N 8", "N 8a", "P 1", "P 2", "P 3", "P 4"];
 
+
+function clearForm(all) {
+    if (!all) {
+        document.getElementById("InventoryNumber").value  = "";
+        document.getElementById("SerialNumber").value  = "";
+    } else {
+        document.getElementById("InventoryNumber").value  = "";
+        document.getElementById("SerialNumber").value  = "";        
+        document.getElementById("Room").value  = "";        
+        document.getElementById("Comment").value  = "";        
+        document.getElementById("Typ").value  = "";        
+        document.getElementsByName("Net").forEach(element => {
+            element.checked = false;
+        });
+        
+        
+
+    }
+
+
+
+}
 
 console.log (rooms.length);
 
@@ -23,36 +47,86 @@ console.log (rooms.length);
 
 
 
-<body>
-        <div >
-      <div class="mb-3">
-        <h1 >Feedback</h1>
+<body >
+    
+
+
+    <div class="mb-3">
+        
 
         <form id="form">
-  
+            <div class="container Xtext-center">
+                <h1 >Inventur</h1><div>&nbsp;</div>
+
        
-          <div>
-            <label  for="InventoryNumber">Inventur Nummer (W, N, NP etc.) </label>
-            <input type="text" name="InventoryNumber" id="InventoryNumber">
-          </div>
+                <div class="mb-3">
+
+                <label  class="form-label" for="InventoryNumber">Inventurnummer</label>
+                <input  class="form-control" type="text" name="InventoryNumber" id="InventoryNumber" placeholder="Inventur Nummer (W, N, NP etc.)">
+
+                <br>
+                <label class="form-label"  for="SerialNumber">Seriennummer</label>
+                <input  class="form-control"  type="text" name="SerialNumber" id="SerialNumber" placeholder="Seriennummer">
+                
+                <label  class="form-label" for="Room">Raumnummer</label>
+                <input  class="form-control" placeholder="Room" id="Room" name="Room" type="text" class="validate" list="datalist">
+                <datalist id="datalist"></datalist>
+          
+          
+          
+                <label  class="form-label" for="Typ">Typ</label>
+                <input  class="form-control" placeholder="Typ: Monitor, Desktop, Drucker" id="Typ" name="Typ" type="text" class="validate" list="typlist">
+                <datalist id="typlist">
+                    <option value="Beamer"></option>
+                    <option value="Dockingstation"></option>
+                    <option value="Dokumentenkamera"></option>
+                    <option value="Drucker"></option>
+                    <option value="Desktop"></option>
+                    <option value="Tastatur"></option>
+                    <option value="Monitor"></option>
+                    <option value="Whiteboard"></option>
+                </datalist>
+          
+          
+          
+        <br><h2>Netz</h2>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Net" value="" check>
+            <label class="form-check-label" for="Verwaltung">Irrelevant</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input"  type="radio" name="Net" value="Pädagogik">
+            <label class="form-check-label" for="Pädagogik">Pädagogik</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Net" value="Verwaltung">
+            <label class="form-check-label" for="Verwaltung">Verwaltung</label>
+        </div>
 
 
-          <div>
-            <label  for="SerialNumber">Seriennummer</label>
-            <input type="text" name="SerialNumber" id="SerialNumber">
-          </div>
+        <br>
+        <label class="form-label"  for="Comment">Kommentar</label>
+        <input  class="form-control"  type="text" name="Comment" id="Comment" placeholder="Kommentar">
+        <br>
+<!--
+          
 
-          <div>
-            <label  for="Room">Raumnummer</label>
-            <input placeholder="Room" id="Room" type="text" class="validate" list="datalist">
-            <datalist id="datalist"></datalist>
+          Net
+    -->      
+          <button class="btn btn-primary" type="submit" id="submit">Abspeichern</button><br>
+
+          <div id="responseStatus"> <br></div>
+          <div id="proceedButton">
+              
+              <button type="button" class="btn btn-success" onclick="clearForm(false)">Seriennummer und Inventurnummer löschen</button>
+              <button type="button" class="btn btn-warning" onclick="clearForm(true)">Alles löschen</button>
+          
           </div>          
-          
-          
-          <button class="btn btn-primary" type="submit" id="submit">Submit</button>
+        </div>
         </form>
     </div>
-    <div id="responseStatus"> </div>
+
   </div>
 
 </body>
@@ -74,7 +148,7 @@ console.log (rooms.length);
             btn.disabled = false
             btn.innerHTML = "Submit"
             alert('Success!', response) 
-            document.getElementById("responseStatus").innerHTML =""
+            //document.getElementById("responseStatus").innerHTML ="Saved..." + " proceed";
 
         }).catch(error => {
             btn.disabled = false
@@ -108,10 +182,15 @@ var userAutoCompleter = new AwbAutoCompletor(rooms, "Room", "datalist", (result)
                 //document.getElementById("Nachname").value = result[0];
                 //document.getElementById("Vorname").value = result[1];
                 //document.getElementById("MSchoolAccount").value = result[2] + "@kkg.muenchen.musin.de";
-                userAutoCompleter.clear();
+                //userAutoCompleter.clear();
             });
 
+            var myModal = (document.getElementById("exampleModal"));
+            myModal.style.visibility="visible"
+
 </script>
+
+
 
 </html>
 
