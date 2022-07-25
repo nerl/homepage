@@ -61,7 +61,7 @@ class AwbAutoCompletor {
     addOptionValues() {
         var optionValueElement;
         this.dataArray.forEach(element => {
-            console.log ("Adding  " + element);
+            //console.log ("Adding  " + element);
             optionValueElement = document.createElement("option");
             //if (element.length>0)
             optionValueElement.value = element.join();
