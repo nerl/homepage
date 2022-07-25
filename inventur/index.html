@@ -78,11 +78,14 @@ console.log (rooms.length);
                 <input  class="form-control" placeholder="Typ: Monitor, Desktop, Drucker" id="Typ" name="Typ" type="text" class="validate" list="typlist">
                 <datalist id="typlist">
                     <option value="Beamer"></option>
+                    <option value="Desktoprechner"></option>
                     <option value="Dockingstation"></option>
                     <option value="Dokumentenkamera"></option>
                     <option value="Drucker"></option>
-                    <option value="Desktop"></option>
-                    <option value="Tastatur"></option>
+                    <option value="Ipad"></option>
+                    <option value="KKG Convertible"></option>
+                    <option value="LTE Accesspoint"></option>
+                    <option value="Lehrerdienstgerät"></option>
                     <option value="Monitor"></option>
                     <option value="Whiteboard"></option>
                 </datalist>
@@ -114,15 +117,14 @@ console.log (rooms.length);
 
           Net
     -->      
-          <button class="btn btn-primary" type="submit" id="submit">Abspeichern</button><br>
+         
 
-          <div id="responseStatus"> <br></div>
-          <div id="proceedButton">
-              
-              <button type="button" class="btn btn-success" onclick="clearForm(false)">Seriennummer und Inventurnummer löschen</button>
-              <button type="button" class="btn btn-warning" onclick="clearForm(true)">Alles löschen</button>
+ 
+               <button class="btn btn-primary" type="submit" id="submit">Abspeichern</button> 
+              <button type="button" class="btn btn-success" onclick="clearForm(false)">Seriennummer und Inventurnummer löschen</button> 
+              <button type="button" class="btn btn-warning" onclick="clearForm(true)">Alle Eingabefelder löschen</button>
           
-          </div>          
+          
         </div>
         </form>
     </div>
@@ -185,8 +187,7 @@ var userAutoCompleter = new AwbAutoCompletor(rooms, "Room", "datalist", (result)
                 //userAutoCompleter.clear();
             });
 
-            var myModal = (document.getElementById("exampleModal"));
-            myModal.style.visibility="visible"
+
 
 </script>
 
