@@ -142,19 +142,19 @@ console.log (rooms.length);
     form.addEventListener('submit', e => {
       e.preventDefault()
       btn.disabled = true
-      btn.innerHTML = "Sending data..."
+      btn.innerHTML = "Daten senden..."
 
       console.log(form)
       fetch(scriptURL, { method: 'POST', body: new FormData(form) })
         .then(response => { 
             btn.disabled = false
-            btn.innerHTML = "Submit"
+            btn.innerHTML = "Abspeichern"
             //alert('Success!', response) 
             //document.getElementById("responseStatus").innerHTML ="Saved..." + " proceed";
 
         }).catch(error => {
             btn.disabled = false
-            btn.innerHTML = "Submit"
+            btn.innerHTML = "Abspeichern"
             alert('Error!', error.message)
         })
     })
