@@ -142,7 +142,7 @@ console.log (rooms.length);
     form.addEventListener('submit', e => {
       e.preventDefault()
       btn.disabled = true
-      btn.innerHTML = "Saving data..."
+      btn.innerHTML = "Sending data..."
 
       console.log(form)
       fetch(scriptURL, { method: 'POST', body: new FormData(form) })
